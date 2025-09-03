@@ -42,13 +42,15 @@ const AuthModal = ({ isOpen, onClose, onLogin }) => {
         ? { email: formData.email, password: formData.password }
         : { username: formData.username, email: formData.email, password: formData.password }
 
-      const response = await fetch(`http://localhost:5000${endpoint}`, {
+      // ==================  هذا هو السطر الذي تم تعديله ==================
+      const response = await fetch(`http://radwan2632.pythonanywhere.com${endpoint}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(payload)
       })
+      // =================================================================
 
       const data = await response.json()
 
@@ -203,4 +205,3 @@ const AuthModal = ({ isOpen, onClose, onLogin }) => {
 }
 
 export default AuthModal
-
