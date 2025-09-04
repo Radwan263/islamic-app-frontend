@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { Button } from '@/components/ui/button.jsx'
 import { Menu, X, Moon, Sun, User, LogOut } from 'lucide-react'
 import AuthModal from './AuthModal.jsx'
+// --- 1. استيراد الشعار الجديد ---
+import logo from '@/assets/logo.png'
 
 const Navbar = ({ darkMode, toggleDarkMode, user, onLogin, onLogout }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -20,12 +22,11 @@ const Navbar = ({ darkMode, toggleDarkMode, user, onLogin, onLogout }) => {
       <nav className="bg-white dark:bg-gray-900 shadow-lg border-b border-gray-200 dark:border-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            {/* Logo */}
+            {/* --- 2. تم تعديل قسم الشعار بالكامل --- */}
             <div className="flex items-center">
               <div className="flex-shrink-0">
-                <h1 className="text-2xl font-bold text-green-600 dark:text-green-400">
-                  التطبيق الإسلامي
-                </h1>
+                {/* تم استبدال النص بالصورة */}
+                <img className="h-10" src={logo} alt="شعار نور الإسلام" />
               </div>
             </div>
 
@@ -192,4 +193,3 @@ const Navbar = ({ darkMode, toggleDarkMode, user, onLogin, onLogout }) => {
 }
 
 export default Navbar
-
