@@ -1,6 +1,6 @@
 // =============================================================
 //  ملف: SadaqaSection.jsx (نسخة نهائية ومصححة)
-//  يتصل بالـ API الحقيقي لجلب وإضافة البيانات
+//  تم إضافة التحققات الأمنية لدالة reduce
 // =============================================================
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button.jsx';
@@ -10,26 +10,23 @@ import { Label } from '@/components/ui/label.jsx';
 import { Textarea } from '@/components/ui/textarea.jsx';
 import { Heart, Plus, Users, Clock, Star } from 'lucide-react';
 
-// --- الرابط الأساسي للـ API ---
-// استخدمنا إعادة التوجيه في Netlify، لذلك نستخدم مسارًا نسبيًا
 const API_BASE_URL = '/api'; 
 
 const SadaqaSection = () => {
   const [sadaqaRequests, setSadaqaRequests] = useState([]);
   const [showAddForm, setShowAddForm] = useState(false);
   const [newRequest, setNewRequest] = useState({
-    person_name: '', // تم تغيير الاسم ليتوافق مع الخادم
+    person_name: '',
     description: '',
-    category: 'General' // تم تغيير الاسم ليتوافق مع الخادم
+    category: 'General'
   });
-  const [loading, setLoading] = useState(true); // يبدأ بـ true لجلب البيانات عند التحميل
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
   const categories = [
     'General', 'Health', 'Education', 'Guidance', 'Family', 'Livelihood', 'Travel', 'Work'
   ];
 
-  // --- دالة لجلب كل الطلبات من الخادم ---
   const fetchSadaqaRequests = async () => {
     try {
       setLoading(true);
@@ -47,7 +44,6 @@ const SadaqaSection = () => {
     }
   };
 
-  // --- جلب البيانات عند تحميل المكون لأول مرة ---
   useEffect(() => {
     fetchSadaqaRequests();
   }, []);
@@ -59,7 +55,6 @@ const SadaqaSection = () => {
     });
   };
 
-  // --- دالة لإرسال طلب جديد إلى الخادم ---
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!newRequest.person_name.trim() || !newRequest.description.trim()) {
@@ -73,8 +68,6 @@ const SadaqaSection = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          // في المستقبل، سنضيف التوكن هنا
-          // 'Authorization': `Bearer ${localStorage.getItem('token')}`
         },
         body: JSON.stringify(newRequest)
       });
@@ -83,7 +76,6 @@ const SadaqaSection = () => {
         throw new Error('فشل في إضافة الطلب');
       }
 
-      // إعادة جلب كل الطلبات من الخادم لعرض الطلب الجديد
       await fetchSadaqaRequests(); 
       setNewRequest({ person_name: '', description: '', category: 'General' });
       setShowAddForm(false);
@@ -93,7 +85,6 @@ const SadaqaSection = () => {
     }
   };
 
-  // --- دالة لإضافة دعوة (تحديث) ---
   const addPrayer = async (requestId) => {
     try {
       const response = await fetch(`${API_BASE_URL}/sadaqa/${requestId}/supplicate`, {
@@ -103,14 +94,13 @@ const SadaqaSection = () => {
         throw new Error('فشل في تحديث عدد الدعوات');
       }
       const updatedRequest = await response.json();
-      // تحديث الحالة في الواجهة فورًا
       setSadaqaRequests(prev =>
         prev.map(request =>
           request.id === requestId ? updatedRequest : request
         )
       );
     } catch (err) {
-      console.error(err); // يمكن عرض رسالة خطأ للمستخدم هنا
+      console.error(err);
     }
   };
 
@@ -123,7 +113,6 @@ const SadaqaSection = () => {
   return (
     <section id="sadaqa" className="py-16 bg-white dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* ... (جزء العنوان والحديث الشريف لا يتغير) ... */}
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
             الصدقة الجارية
@@ -139,7 +128,6 @@ const SadaqaSection = () => {
           </div>
         </div>
 
-        {/* زر ونموذج الإضافة (لا يتغير) */}
         <div className="text-center mb-8">
           <Button
             onClick={() => setShowAddForm(!showAddForm)}
@@ -214,14 +202,12 @@ const SadaqaSection = () => {
           </Card>
         )}
 
-        {/* عرض رسالة الخطأ */}
         {error && (
           <div className="text-center mb-4 p-3 bg-red-100 text-red-700 rounded-lg max-w-2xl mx-auto">
             {error}
           </div>
         )}
 
-        {/* عرض مؤشر التحميل */}
         {loading ? (
           <div className="flex justify-center items-center h-64">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600"></div>
@@ -229,13 +215,12 @@ const SadaqaSection = () => {
           </div>
         ) : (
           <>
-            {/* الإحصائيات (لا تتغير) */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
               <Card>
                 <CardContent className="p-6 text-center">
                   <Users className="h-8 w-8 text-blue-600 mx-auto mb-2" />
                   <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
-                    {sadaqaRequests.length}
+                    {Array.isArray(sadaqaRequests) ? sadaqaRequests.length : 0}
                   </h3>
                   <p className="text-gray-600 dark:text-gray-300">طلبات الدعاء</p>
                 </CardContent>
@@ -244,7 +229,8 @@ const SadaqaSection = () => {
                 <CardContent className="p-6 text-center">
                   <Heart className="h-8 w-8 text-red-600 mx-auto mb-2" />
                   <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
-                    {sadaqaRequests.reduce((sum, req) => sum + (req.supplication_count || 0), 0)}
+                    {/* --- التعديل الأول هنا --- */}
+                    {Array.isArray(sadaqaRequests) ? sadaqaRequests.reduce((sum, req) => sum + (req.supplication_count || 0), 0) : 0}
                   </h3>
                   <p className="text-gray-600 dark:text-gray-300">إجمالي الدعوات</p>
                 </CardContent>
@@ -253,16 +239,16 @@ const SadaqaSection = () => {
                 <CardContent className="p-6 text-center">
                   <Star className="h-8 w-8 text-yellow-600 mx-auto mb-2" />
                   <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
-                    {Math.round(sadaqaRequests.reduce((sum, req) => sum + (req.supplication_count || 0), 0) / sadaqaRequests.length) || 0}
+                    {/* --- التعديل الثاني هنا --- */}
+                    {sadaqaRequests && sadaqaRequests.length > 0 ? Math.round(sadaqaRequests.reduce((sum, req) => sum + (req.supplication_count || 0), 0) / sadaqaRequests.length) : 0}
                   </h3>
                   <p className="text-gray-600 dark:text-gray-300">متوسط الدعوات</p>
                 </CardContent>
               </Card>
             </div>
 
-            {/* عرض الطلبات */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {sadaqaRequests.map((request) => (
+              {Array.isArray(sadaqaRequests) && sadaqaRequests.map((request) => (
                 <Card key={request.id} className="hover:shadow-lg transition-shadow">
                   <CardHeader>
                     <div className="flex justify-between items-start">
@@ -307,8 +293,7 @@ const SadaqaSection = () => {
               ))}
             </div>
 
-            {/* حالة عدم وجود طلبات */}
-            {!loading && sadaqaRequests.length === 0 && (
+            {!loading && (!sadaqaRequests || sadaqaRequests.length === 0) && (
               <div className="text-center py-12">
                 <Heart className="h-16 w-16 text-gray-400 mx-auto mb-4" />
                 <p className="text-gray-500 dark:text-gray-400">
