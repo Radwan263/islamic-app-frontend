@@ -43,7 +43,7 @@ const AuthModal = ({ isOpen, onClose, onLogin }) => {
         : { username: formData.username, email: formData.email, password: formData.password }
 
       // ==================  هذا هو السطر الذي تم تعديله ==================
-      const response = await fetch(`http://radwan2632.pythonanywhere.com${endpoint}`, {
+      const response = await fetch(endpoint, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
