@@ -1,0 +1,46 @@
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  text-align: center;
+  min-height: 100vh;
+}
+
+.welcome-message {
+  margin-bottom: 30px;
+}
+
+.welcome-message h1 {
+  font-size: 2em;
+  margin-bottom: 10px;
+}
+
+.main-menu {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* المسافة بين الأزرار */
+}
+
+.menu-item {
+  display: block;
+  background-color: #4a5568; /* لون الخلفية */
+  color: white; /* لون النص */
+  padding: 15px;
+  border-radius: 8px;
+  text-decoration: none; /* إزالة الخط تحت الرابط */
+  font-size: 1.2em;
+  transition: background-color 0.3s;
+}
+
+.menu-item:hover {
+  background-color: #2d3748; /* تغيير اللون عند مرور الماوس */
+}
+
+.developer-info {
+  margin-top: auto; /* يدفع بيانات المطور إلى الأسفل */
+  padding-top: 30px;
+  color: #718096;
+}
