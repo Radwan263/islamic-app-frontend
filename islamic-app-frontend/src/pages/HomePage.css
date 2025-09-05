@@ -1,52 +1,73 @@
-.home-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-  text-align: center;
+/* استيراد الخط العربي */
+@import url('https://fonts.googleapis.com/css2?family=Amiri&display=swap');
+
+body {
+  margin: 0; /* إزالة أي هوامش افتراضية للمتصفح */
+}
+
+.islamic-theme-container {
+  /* --- استخدام الخلفية الخضراء مع القوس --- */
+  background-image: url('/islamic_background.jpg');
+  background-size: cover; /* اجعل الخلفية تملأ الشاشة */
+  background-position: center top; /* ركز على الجزء العلوي من الخلفية */
+  background-repeat: no-repeat;
   min-height: 100vh;
-  background-color: #f7fafc; /* لون خلفية فاتح */
-  color: #2d3748; /* لون نص غامق */
-}
-
-.welcome-message {
-  margin-bottom: 30px;
-}
-
-.welcome-message h1 {
-  font-size: 2em;
-  margin-bottom: 10px;
-  color: #2c5282; /* لون أزرق غامق للعنوان */
-}
-
-.main-menu {
-  width: 100%;
-  max-width: 400px;
+  padding: 20px;
   display: flex;
-  flex-direction: column;
+  justify-content: center; /* توسيط المحتوى أفقيًا */
+}
+
+.content-area {
+  /* هذا هو الصندوق الذي سيحتوي على كل شيء داخل القوس الأبيض */
+  width: 100%;
+  max-width: 500px;
+  margin-top: 15vh; /* إنزال المحتوى ليبدأ من داخل القوس الأبيض (عدّل هذه القيمة حسب الحاجة) */
+  text-align: center;
+}
+
+.home-logo {
+  width: 90px; /* تصغير اللوجو قليلاً */
+  height: auto;
+}
+
+.main-title {
+  font-family: 'Amiri', serif;
+  font-size: 2.8em;
+  color: #5d4037; /* لون بني غامق ليناسب الإطارات */
+  margin-top: 0;
+  margin-bottom: 25px;
+}
+
+.buttons-grid {
+  display: grid;
+  grid-template-columns: 1fr; /* عمود واحد فقط ليتناسب مع شكل الإطارات */
   gap: 15px; /* المسافة بين الأزرار */
 }
 
-.menu-item {
-  display: block;
-  background-color: #3182ce; /* لون أزرق للخلفية */
-  color: white; /* لون النص */
-  padding: 15px;
-  border-radius: 8px;
-  text-decoration: none; /* إزالة الخط تحت الرابط */
-  font-size: 1.2em;
+.frame-button {
+  /* --- استخدام صورة الإطار كخلفية للزر --- */
+  background-image: url('/islamic_frame.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  
+  height: 75px; /* تحديد ارتفاع للزر (عدّله ليتناسب مع أبعاد صورتك) */
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  text-decoration: none;
+  transition: transform 0.2s ease-in-out;
+}
+
+.frame-button:hover {
+  transform: scale(1.03); /* تأثير تكبير بسيط */
+}
+
+.button-text {
+  font-family: 'Amiri', serif;
+  font-size: 1.5em;
   font-weight: bold;
-  transition: background-color 0.3s, transform 0.2s;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.menu-item:hover {
-  background-color: #2b6cb0; /* تغيير اللون عند مرور الماوس */
-  transform: translateY(-2px); /* تأثير رفع بسيط عند المرور */
-}
-
-.developer-info {
-  margin-top: auto; /* يدفع بيانات المطور إلى الأسفل */
-  padding-top: 30px;
-  color: #a0aec0; /* لون رمادي فاتح */
+  color: #5d4037; /* نفس اللون البني الغامق */
 }

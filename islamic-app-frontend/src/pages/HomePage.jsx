@@ -1,27 +1,39 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './HomePage.css'; // تأكد من أن هذا السطر موجود
+import './HomePage.css'; // سنقوم بتحديث هذا الملف بشكل كبير
+import { FaQuran, FaBook, FaPrayingHands, FaHandHoldingHeart, FaDotCircle, FaMosque } from 'react-icons/fa';
 
 const HomePage = () => {
   return (
-    <div className="home-container">
-      <div className="welcome-message">
-        <h1>السلام عليكم ورحمة الله وبركاته</h1>
-        <p>نورت تطبيق نور الإسلام، اختر ما تريد</p>
-      </div>
+    <div className="islamic-theme-container">
+      {/* هذا الجزء سيكون داخل القوس الأبيض في الخلفية */}
+      <div className="content-area">
+        <img src="/logo.png" alt="شعار نور الإسلام" className="home-logo" />
+        <h1 className="main-title">نور الإسلام</h1>
 
-      <nav className="main-menu">
-        <Link to="/quran" className="menu-item">القرآن الكريم</Link>
-        <Link to="/hadith" className="menu-item">الأحاديث</Link>
-        <Link to="/azkar" className="menu-item">الأذكار</Link>
-        <Link to="/duas" className="menu-item">الأدعية</Link>
-        <Link to="/sadaqa" className="menu-item">صدقة جارية</Link>
-        <Link to="/tasbih" className="menu-item">السبحة الإلكترونية</Link>
-        <Link to="/prayer-times" className="menu-item">أوقات الصلاة</Link>
-      </nav>
-
-      <div className="developer-info">
-        <p>بيانات المطور</p>
+        <nav className="buttons-grid">
+          <Link to="/quran" className="frame-button">
+            <span className="button-text">القرآن الكريم</span>
+          </Link>
+          <Link to="/hadith" className="frame-button">
+            <span className="button-text">الأحاديث</span>
+          </Link>
+          <Link to="/azkar" className="frame-button">
+            <span className="button-text">الأذكار</span>
+          </Link>
+          <Link to="/duas" className="frame-button">
+            <span className="button-text">الأدعية</span>
+          </Link>
+          <Link to="/sadaqa" className="frame-button">
+            <span className="button-text">صدقة جارية</span>
+          </Link>
+          <Link to="/tasbih" className="frame-button">
+            <span className="button-text">السبحة</span>
+          </Link>
+          <Link to="/prayer-times" className="frame-button">
+            <span className="button-text">أوقات الصلاة</span>
+          </Link>
+        </nav>
       </div>
     </div>
   );
