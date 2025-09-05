@@ -1,0 +1,52 @@
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  text-align: center;
+  min-height: 100vh;
+  background-color: #f7fafc; /* لون خلفية فاتح */
+  color: #2d3748; /* لون نص غامق */
+}
+
+.welcome-message {
+  margin-bottom: 30px;
+}
+
+.welcome-message h1 {
+  font-size: 2em;
+  margin-bottom: 10px;
+  color: #2c5282; /* لون أزرق غامق للعنوان */
+}
+
+.main-menu {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* المسافة بين الأزرار */
+}
+
+.menu-item {
+  display: block;
+  background-color: #3182ce; /* لون أزرق للخلفية */
+  color: white; /* لون النص */
+  padding: 15px;
+  border-radius: 8px;
+  text-decoration: none; /* إزالة الخط تحت الرابط */
+  font-size: 1.2em;
+  font-weight: bold;
+  transition: background-color 0.3s, transform 0.2s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.menu-item:hover {
+  background-color: #2b6cb0; /* تغيير اللون عند مرور الماوس */
+  transform: translateY(-2px); /* تأثير رفع بسيط عند المرور */
+}
+
+.developer-info {
+  margin-top: auto; /* يدفع بيانات المطور إلى الأسفل */
+  padding-top: 30px;
+  color: #a0aec0; /* لون رمادي فاتح */
+}
